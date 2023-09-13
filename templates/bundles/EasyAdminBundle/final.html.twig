@@ -1,0 +1,69 @@
+{# templates/bundles/EasyAdminBundle/final.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Final Page{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .green-row {
+            background-color: green;
+            color: white;
+        }
+
+        .red-row {
+            background-color: red;
+            color: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+   
+ <div class="container">
+        <h1><a href="{{ url('dashboard') }}">Retour au menu principal</a></h1>
+        <h1>Liste des étudiants convoqués pour la mobilité à Nice</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Identifiant</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set lastIdentifiant = null %}
+                {% for key, reo in reos %}
+                    {% if reo.identifiant != lastIdentifiant %}
+                        {% set lastIdentifiant = reo.identifiant %}
+                        <tr class="{{ key < 2 ? 'green-row' : 'red-row' }}">
+                            <td>{{ reo.identifiant }}</td>
+                            <td>{{ reo.nom }}</td>
+                            <td>{{ reo.prenom }}</td>
+                            <td>{{ reo.score }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+ 
+{% endblock %}

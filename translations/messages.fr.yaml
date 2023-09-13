@@ -1,0 +1,29 @@
+
+Etudiants: Etudiants
+Filieres: Filières
+Users: Utilisateurs
+Etudiant: Etudiant
+Classeact: classe actuelle
+Classd: classes de l'année dernière
+Notea:  note obtenue en première année
+Noteb: note obtenue en 2 éme année
+Notec: note obtenue en 3 éme année
+Niveau A : niveau anglais B*
+Niveau F: niveau français B*
+Filiere: Filière
+User: Utilisateur
+Dashboard: Esprit 
+security:
+  reset-password: Récupérer le mot de passe
+  forgetten-password: Mot de passe oublié
+  enter-email: Tapez votre E-mail
+  send-email:  Envoyez le lien pour récupérer le mot de passe
+  email: E-mail
+  password: Mot de passe
+  username: Nom et prénom de l'utilisateur
+  remember-me: Se souvenir de moi
+  login: Se connecter
+  dont-have-account: Je n'ai pas de compte
+  register: S'inscrire
+  accept: J'accepte toutes 
+  terms: les conditions d'utilisation

@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire d'orientation - École de Nice{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h1><a href="{{ url('dashboard') }}">Retour au menu principal</a></h1>
+                <div class="card">
+                    <div class="card-header">Inscription pour une Opportunité de Mobilité Internationale</div>
+
+                    <div class="card-body">
+                        {% if currentDateTime < deadline %} {# Utilisez la variable currentDateTime #}
+                            <p>Inscrivez-vous dès maintenant pour profiter de cette opportunité de mobilité internationale offerte par l'école de Nice à travers un semestre d'échange.</p>
+                            {{ form_start(form) }}
+                                <div class="form-group">
+                                    {{ form_label(form.identifiant, 'Identifiant') }}
+                                    {{ form_widget(form.identifiant, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                                </div>
+                            {{ form_end(form) }}
+                            <div id="countdown"></div> {# Div pour afficher le temps restant #}
+                        {% else %}
+                            <p>La date limite pour remplir le formulaire est dépassée.</p>
+                        {% endif %}
+
+                        {% for flashMessage in app.flashes('success') %}
+                            <div class="alert alert-success">{{ flashMessage }}</div>
+                        {% endfor %}
+
+                        {% for flashMessage in app.flashes('error') %}
+                            <div class="alert alert-danger">{{ flashMessage }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Date limite (dans le format JavaScript)
+        const deadline = new Date('{{ deadline|date("Y-m-d H:i:s") }}');
+
+        // Mettre à jour le décompte toutes les secondes
+        const countdown = document.getElementById('countdown');
+        setInterval(() => {
+            const now = new Date();
+            const timeRemaining = deadline - now;
+
+            if (timeRemaining <= 0) {
+                countdown.innerHTML = "La date limite est dépassée.";
+            } else {
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+                countdown.innerHTML = `Temps restant : ${days} jours ${hours} heures ${minutes} minutes ${seconds} secondes`;
+            }
+        }, 1000);
+    </script>
+{% endblock %}
